@@ -17,31 +17,31 @@ public class DeathFloor : MonoBehaviour
     private void OnTriggerEnter2D (Collider2D collision)
     {
         //Platform Destroyer takes platforms it hits and moves them up to a new random location
-        if (collision.gameObject.name.StartsWith("Platform"))
+        if (collision.gameObject.layer == 7)
         {
             //Random chance for Super Platform
-            if (Random.Range(1, 6) == 1)
+            if (Random.Range(1, 10) == 1)
             {
                 //Destroies Normal Platform, spawns Super Platform
                 Destroy(collision.gameObject);
 
-                Instantiate(superPlatform, new Vector2(Random.Range(-4f, 4f), player.transform.position.y + (14 + Random.Range(minY, maxY))), Quaternion.identity);
+                Instantiate(superPlatform, new Vector2(Random.Range(-4f, 4f), player.transform.position.y + (16 + Random.Range(minY, maxY))), Quaternion.identity);
             }
 
             else
             {
                 //Moves Normal Platform
-                collision.gameObject.transform.position =  new Vector2(Random.Range(-4f, 4f), player.transform.position.y + (14 + Random.Range(minY, maxY)));
+                collision.gameObject.transform.position =  new Vector2(Random.Range(-4f, 4f), player.transform.position.y + (16 + Random.Range(minY, maxY)));
             }
         }
 
-        else if (collision.gameObject.name.StartsWith("Super"))
+        else if (collision.gameObject.layer == 8)
         {
             //Random chance to keep Super Platform
-            if (Random.Range(1, 6) == 1)
+            if (Random.Range(1, 10) == 1)
             {
                 //Moves Super Platform
-                collision.gameObject.transform.position = new Vector2(Random.Range(-4f, 4f), player.transform.position.y + (14 + Random.Range(minY, maxY)));
+                collision.gameObject.transform.position = new Vector2(Random.Range(-4f, 4f), player.transform.position.y + (16 + Random.Range(minY, maxY)));
             }
 
             else
@@ -49,7 +49,7 @@ public class DeathFloor : MonoBehaviour
                 //Destroies Super Platform, Spawns Normal Platform
                 Destroy(collision.gameObject);
 
-                Instantiate(platform, new Vector2(Random.Range(-4f, 4f), player.transform.position.y + (14 + Random.Range(minY, maxY))), Quaternion.identity);
+                Instantiate(platform, new Vector2(Random.Range(-4f, 4f), player.transform.position.y + (16 + Random.Range(minY, maxY))), Quaternion.identity);
             }
         }
     }

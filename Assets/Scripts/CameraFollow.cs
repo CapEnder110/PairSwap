@@ -12,7 +12,9 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        //Disable GameOver UI
+        //Start Game & Disable GameOver UI
+        Time.timeScale = 1;
+
         gameOverUI.SetActive(false);
     }
 
@@ -29,10 +31,10 @@ public class CameraFollow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.layer == 3)
         {
-            //Destroy Player and Enable GameOver UI
-            Destroy(collision.gameObject);
+            //End Game & Enable GameOver UI
+            Time.timeScale = 0;
 
             gameOverUI.SetActive(true);
         }
